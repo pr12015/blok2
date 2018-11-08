@@ -19,6 +19,7 @@ namespace RBAC_Authorization
             if (principal != null)
             {
                 authorized = (principal as CustomPrincipal).IsInRole(Permissions.Read.ToString());
+                //authorized = (principal as CustomPrincipal).IsInRole("Readers");
 
                 if (authorized == false)
                 {

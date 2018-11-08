@@ -31,14 +31,29 @@ namespace RBAC_Authorization
 
         private static List<string> NoPermissions = new List<string>();
 
+        /*
         public static List<string> GetPermissions(string role)
         {
             switch (role)
             {
-                case "Potrosac": return PotrosacPermissions;
+                case "Customer": return PotrosacPermissions;
                 case "Operator": return OperatorPermissions;
                 case "Admin": return AdminPermissions;
-                case "SuperKorisnik": return SuperKorisnikPermissions;
+                case "SuperUser": return SuperKorisnikPermissions;
+                default: return NoPermissions; // ili null
+            }
+        }
+        */
+
+        public static List<string> GetPermissions(string role)
+        {
+            switch (role)
+            {
+                case "Readers": return PotrosacPermissions;
+                case "Modifiers": return OperatorPermissions;
+                case "Writers": return AdminPermissions;
+                case "Deleters": return AdminPermissions;
+                case "Super": return SuperKorisnikPermissions;
                 default: return NoPermissions; // ili null
             }
         }

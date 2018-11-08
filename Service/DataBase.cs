@@ -123,10 +123,9 @@ namespace Service
                 }
             }
 
-            // Delete old db.txt and create new. Delete db_tmp.txt.
+            // Delete old db.txt and create new.
             File.Delete(_dbPath);
             File.Move(destination, _dbPath);
-            File.Delete(destination);
         }
 
         /// <summary>

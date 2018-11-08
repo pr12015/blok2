@@ -41,7 +41,9 @@ namespace RBAC_Authorization
 
         public bool IsInRole(string role)
         {
+            // var vals = Roles.Values;
             foreach (var userPermissions in Roles.Values)
+            //foreach (var userPermissions in Roles)
                 if (userPermissions.Contains(role))
                     return true;
 

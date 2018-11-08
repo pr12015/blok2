@@ -17,9 +17,9 @@ namespace RBAC_Authorization
 
     public enum Roles
     {
-        Potrosac,
+        Customer,
         Operator,
         Admin,
-        SuperKorisnik
+        SuperUser
     }
 }
