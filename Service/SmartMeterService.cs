@@ -19,8 +19,9 @@ namespace Service
 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
+            var permission = Permissions.Modify.ToString().ToLower();
             /// audit both successfull and failed authorization checks
-            if (principal.IsInRole(Permissions.Modify.ToString()))
+            if (principal.IsInRole(permission))
             {
                 value = newValue;
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
@@ -40,9 +41,10 @@ namespace Service
 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
+            var permission = Permissions.Add.ToString().ToLower();
             /// audit both successfull and failed authorization checks
 
-            if (principal.IsInRole(Permissions.Add.ToString()))
+            if (principal.IsInRole(permission))
             {
                 value = 0;
                 Console.WriteLine("AddDB() passed for user {0}.", principal.Identity.Name);
@@ -62,9 +64,10 @@ namespace Service
 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
-            /// audit both successfull and failed authorization checks
+            var permission = Permissions.Delete.ToString().ToLower();
 
-            if (principal.IsInRole(Permissions.Delete.ToString()))
+            /// audit both successfull and failed authorization checks
+            if (principal.IsInRole(permission))
             {
                 value = 0;
                 Console.WriteLine("DeleteEntityDB() passed for user {0}.", principal.Identity.Name);
@@ -84,9 +87,10 @@ namespace Service
 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
+            var permission = Permissions.DeleteAll.ToString().ToLower();
+            
             /// audit both successfull and failed authorization checks
-
-            if (principal.IsInRole(Permissions.DeleteAll.ToString()))
+            if (principal.IsInRole(permission))
             {
                 value = 0;
                 Console.WriteLine("DeleteDB() passed for user {0}.", principal.Identity.Name);
@@ -102,9 +106,18 @@ namespace Service
 
         public int GetBill()
         {
-            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            Console.WriteLine("Read() successfully executed by {0}.", principal.Identity.Name);
-            return value;
+           CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+           // if (principal.IsInRole(Permissions.Read.ToString()))
+           // {
+                Console.WriteLine("Read() successfully executed by {0}.", principal.Identity.Name);
+                return value;
+           // }
+           /* else
+            {
+                Console.WriteLine("GetBill() failed for user {0}.", principal.Identity.Name);
+            }
+            return -1;
+            */
         }
 
     }

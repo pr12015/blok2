@@ -14,12 +14,4 @@ namespace RBAC_Authorization
         DeleteAll,
         Read
     }
-
-    public enum Roles
-    {
-        Customer,
-        Operator,
-        Admin,
-        SuperUser
-    }
 }

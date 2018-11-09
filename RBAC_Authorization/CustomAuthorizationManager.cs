@@ -12,26 +12,15 @@ namespace RBAC_Authorization
     {
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
-            bool authorized = false;
-
             IPrincipal principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as IPrincipal;
 
             if (principal != null)
             {
-                authorized = (principal as CustomPrincipal).IsInRole(Permissions.Read.ToString());
-                //authorized = (principal as CustomPrincipal).IsInRole("Readers");
-
-                if (authorized == false)
-                {
-                    /// audit authorization failed event					
-                }
-                else
-                {
-                    /// audit successfull authorization event
-                }
+                string permission = Permissions.Read.ToString().ToLower();
+                return (principal as CustomPrincipal).IsInRole(permission);
             }
 
-            return authorized;
+            return false;
         }
     }
 }

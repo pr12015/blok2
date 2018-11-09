@@ -10,7 +10,7 @@ namespace RBAC_Authorization
     public class CustomPrincipal : IPrincipal
     {
         private WindowsIdentity winId = null;
-        private Dictionary<string, List<string>> Roles = new Dictionary<string, List<string>>();
+        private List<string> Roles = new List<string>();
 
         public IIdentity Identity
         {
@@ -32,20 +32,21 @@ namespace RBAC_Authorization
                 if (name.ToString().Contains("\\"))
                     groupName = name.ToString().Split('\\')[1];
 
-                if (!Roles.ContainsKey(groupName))
+                if (!Roles.Contains(groupName))
                 {
-                    Roles.Add(groupName, RolesConfig.GetPermissions(groupName));
+                    Roles.Add(groupName);
                 }
             }
         }
 
         public bool IsInRole(string role)
         {
-            // var vals = Roles.Values;
-            foreach (var userPermissions in Roles.Values)
-            //foreach (var userPermissions in Roles)
-                if (userPermissions.Contains(role))
+            foreach (var group in Roles)
+            {
+                var permissions = RBACConfigParser.GetPermissions(group);
+                if (permissions.Contains(role))
                     return true;
+            }
 
             return false;
         }

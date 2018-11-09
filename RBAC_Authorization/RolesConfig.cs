@@ -45,6 +45,7 @@ namespace RBAC_Authorization
         }
         */
 
+            /*
         public static List<string> GetPermissions(string role)
         {
             switch (role)
@@ -57,5 +58,6 @@ namespace RBAC_Authorization
                 default: return NoPermissions; // ili null
             }
         }
+        */
     }
 }

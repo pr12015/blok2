@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<groups>
+  <Customers>
+    <permission>read</permission>
+  </Customers>
+
+  <Operators>
+    <permission>read</permission>
+    <permission>modify</permission>
+  </Operators>
+
+  <Admins>
+    <permission>read</permission>
+    <permission>delete</permission>
+    <permission>add</permission>
+  </Admins>
+
+  <SuperUsers>
+    <permission>read</permission>
+    <permission>deleteall</permission>
+  </SuperUsers>
+</groups>
+
