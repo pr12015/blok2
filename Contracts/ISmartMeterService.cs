@@ -6,13 +6,16 @@ namespace Contracts
     public interface ISmartMeterService
     {
         [OperationContract]
-        bool ModifyDB(int newValue);
+        bool ModifyID(int newValue, int oldValue);
 
         [OperationContract]
-        bool AddDB();
+        bool ModifyReading(double newValue, int id);
 
         [OperationContract]
-        bool DeleteEntityDB();
+        bool AddDB(int id, string fullName, double reading);
+
+        [OperationContract]
+        bool DeleteEntityDB(int id);
 
         [OperationContract]
         bool DeleteDB();

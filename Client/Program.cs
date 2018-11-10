@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ServiceModel;
+using System.ServiceModel; 
 
 namespace Client
 {
@@ -16,9 +16,12 @@ namespace Client
 
             using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
             {
-                proxy.AddDB();
-                proxy.ModifyDB(9);
-                proxy.DeleteEntityDB();
+                
+
+                proxy.AddDB(123, "Petar", 123.12);
+                proxy.ModifyID(321, 123);
+                proxy.ModifyReading(431.12, 321);
+                //proxy.DeleteEntityDB(123);
                 proxy.DeleteDB();
                 proxy.GetBill();
             }

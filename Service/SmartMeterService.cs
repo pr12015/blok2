@@ -11,9 +11,7 @@ namespace Service
 {
     class SmartMeterService : ISmartMeterService
     {
-        private static int value = 10;
-
-        public bool ModifyDB(int newValue)
+        public bool ModifyID(int newValue, int oldValue)
         {
             bool modified = false;
 
@@ -23,8 +21,8 @@ namespace Service
             /// audit both successfull and failed authorization checks
             if (principal.IsInRole(permission))
             {
-                value = newValue;
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
+                DataBase.ModifyID(oldValue, newValue);
                 modified = true;
             }
             else
@@ -35,10 +33,32 @@ namespace Service
             return modified;
         }
 
-        public bool AddDB()
+        public bool ModifyReading(double newValue, int id)
         {
-            bool deleted = false;
+            bool modified = false;
 
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+            var permission = Permissions.Modify.ToString().ToLower();
+            /// audit both successfull and failed authorization checks
+            if (principal.IsInRole(permission))
+            {
+                Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
+                DataBase.ModifyReading(id, newValue);
+                modified = true;
+            }
+            else
+            {
+                Console.WriteLine("ModifyDB() failed for user {0}.", principal.Identity.Name);
+            }
+
+            return modified;
+        }
+
+        public bool AddDB(int id, string fullName, double reading)
+        {
+            bool added = false;
+            EMeter newEMeter = new EMeter(id, fullName, reading); 
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
             var permission = Permissions.Add.ToString().ToLower();
@@ -46,19 +66,19 @@ namespace Service
 
             if (principal.IsInRole(permission))
             {
-                value = 0;
                 Console.WriteLine("AddDB() passed for user {0}.", principal.Identity.Name);
-                deleted = true;
+                DataBase.Write(newEMeter);
+                added = true;
             }
             else
             {
                 Console.WriteLine("AddDB() failed for user {0}.", principal.Identity.Name);
             }
 
-            return deleted;
+            return added;
         }
 
-        public bool DeleteEntityDB()
+        public bool DeleteEntityDB(int id)
         {
             bool deleted = false;
 
@@ -69,8 +89,8 @@ namespace Service
             /// audit both successfull and failed authorization checks
             if (principal.IsInRole(permission))
             {
-                value = 0;
                 Console.WriteLine("DeleteEntityDB() passed for user {0}.", principal.Identity.Name);
+                DataBase.DeleteEntity(id);
                 deleted = true;
             }
             else
@@ -92,8 +112,8 @@ namespace Service
             /// audit both successfull and failed authorization checks
             if (principal.IsInRole(permission))
             {
-                value = 0;
                 Console.WriteLine("DeleteDB() passed for user {0}.", principal.Identity.Name);
+                DataBase.DeleteDB();
                 deleted = true;
             }
             else
@@ -110,7 +130,7 @@ namespace Service
            // if (principal.IsInRole(Permissions.Read.ToString()))
            // {
                 Console.WriteLine("Read() successfully executed by {0}.", principal.Identity.Name);
-                return value;
+                return 1;
            // }
            /* else
             {

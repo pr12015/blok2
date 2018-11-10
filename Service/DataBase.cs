@@ -9,7 +9,8 @@ namespace Service
 {
     class DataBase
     {
-        private static readonly string _dbPath = @"C:\Users\stefan\Desktop\blok22\db.txt";
+        //private static readonly string _dbPath = @"C:\Users\stefan\Desktop\blok22\db.txt";
+        private static readonly string _dbPath = @"C:\Users\SARA\Desktop\db.txt";
 
         /// <summary>
         /// Write EMeter to DB.
@@ -36,6 +37,10 @@ namespace Service
         {
             string line;
             bool found = false;
+            if (!File.Exists(_dbPath))
+            {
+                return null;
+            }
             using (var reader = new StreamReader(_dbPath))
             {
                 while ((line = reader.ReadLine()) != null)
@@ -63,7 +68,7 @@ namespace Service
         /// <param name="eMeterOld"> EMeter object read from DB. </param>
         public static void WriteModified(int newID, EMeter eMeterOld)
         {
-            string destination = @"C:\Users\stefan\Desktop\blok22\db_tmp.txt";
+            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
             string line = null;
 
             using (var reader = new StreamReader(_dbPath))
@@ -99,7 +104,7 @@ namespace Service
         /// <param name="eMeterOld"> EMeter object read from DB. </param>
         public static void WriteModified(double newReading, EMeter eMeterOld)
         {
-            string destination = @"C:\Users\stefan\Desktop\blok22\db_tmp.txt";
+            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
             string line = null;
 
             using (var reader = new StreamReader(_dbPath))
@@ -156,7 +161,40 @@ namespace Service
                 WriteModified(newReading, eMeterOld);
             else
                 throw new Exception("EMeter with ID: " + id + " doesn't exist.");
+        }
 
+        public static void DeleteEntity(int ID)
+        {
+            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
+            string line = null;
+
+            using (var reader = new StreamReader(_dbPath))
+            using (var writer = new StreamWriter(destination))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var lineContent = line.Split(' ');
+                    int currentReading = Int32.Parse(lineContent[0]);
+
+                    if (currentReading == ID)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+
+            // Delete old db.txt and create new.
+            File.Delete(_dbPath);
+            File.Move(destination, _dbPath);
+        }
+
+        public static void DeleteDB()
+        {
+            File.Delete(_dbPath);
         }
     }
 }
