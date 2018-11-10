@@ -18,7 +18,6 @@ namespace Client
             factory = this.CreateChannel();
         }
 
-
         public void Dispose()
         {
             if (factory != null)
@@ -29,13 +28,13 @@ namespace Client
             this.Close();
         }
 
-        public bool ModifyDB(int newValue)
+        public bool ModifyID(int newValue, int oldValue)
         {
             bool allowed = false;
 
             try
             {
-                allowed = factory.ModifyDB(newValue);
+                allowed = factory.ModifyID(newValue, oldValue);
                 Console.WriteLine("Modify() : {0}", allowed);
             }
             catch (Exception e)
@@ -46,12 +45,29 @@ namespace Client
             return allowed;
         }
 
-        public bool AddDB()
+        public bool ModifyReading(double newValue, int id)
+        {
+            bool modified = false;
+
+            try
+            {
+                modified = factory.ModifyReading(newValue, id);
+                Console.WriteLine("Modify() : {0}", modified);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while trying to Modify(). {0}", e.Message);
+            }
+
+            return modified;
+        }
+
+        public bool AddDB(int id, string fullName, double reading)
         {
             bool allowed = false;
             try
             {
-                allowed = factory.AddDB();
+                allowed = factory.AddDB(id, fullName, reading);
                 Console.WriteLine("Add() : {0}", allowed);
             }
             catch (Exception e)
@@ -62,12 +78,12 @@ namespace Client
             return allowed;
         }
 
-        public bool DeleteEntityDB()
+        public bool DeleteEntityDB(int id)
         {
             bool allowed = false;
             try
             {
-                allowed = factory.DeleteEntityDB();
+                allowed = factory.DeleteEntityDB(id);
                 Console.WriteLine("DeleteEntityDB() : {0}", allowed);
             }
             catch (Exception e)
