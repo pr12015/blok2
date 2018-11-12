@@ -9,7 +9,7 @@ namespace RBAC_Authorization
 {
     static class RBACConfigParser
     {
-        private static readonly string path = @"C:\Users\SARA\Desktop\blok2\Service\rbac_config.xml";
+        private static readonly string path = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\rbac_config.xml";
 
         public static List<string> GetPermissions(string group)
         {

@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IServer.cs" />
     <Compile Include="ISmartMeterService.cs" />
+    <Compile Include="IWorker.cs" />
+    <Compile Include="IWorkerCallBack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

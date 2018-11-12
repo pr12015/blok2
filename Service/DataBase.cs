@@ -10,7 +10,7 @@ namespace Service
     class DataBase
     {
         //private static readonly string _dbPath = @"C:\Users\stefan\Desktop\blok22\db.txt";
-        private static readonly string _dbPath = @"C:\Users\SARA\Desktop\db.txt";
+        private static readonly string _dbPath = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\db.txt";
 
         /// <summary>
         /// Write EMeter to DB.
@@ -68,7 +68,7 @@ namespace Service
         /// <param name="eMeterOld"> EMeter object read from DB. </param>
         public static void WriteModified(int newID, EMeter eMeterOld)
         {
-            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
+            string destination = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\db_tmp.txt";
             string line = null;
 
             using (var reader = new StreamReader(_dbPath))
@@ -104,7 +104,7 @@ namespace Service
         /// <param name="eMeterOld"> EMeter object read from DB. </param>
         public static void WriteModified(double newReading, EMeter eMeterOld)
         {
-            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
+            string destination = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\db_tmp.txt";
             string line = null;
 
             using (var reader = new StreamReader(_dbPath))
@@ -165,7 +165,7 @@ namespace Service
 
         public static void DeleteEntity(int ID)
         {
-            string destination = @"C:\Users\SARA\Desktop\db_tmp.txt";
+            string destination = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\db_tmp.txt";
             string line = null;
 
             using (var reader = new StreamReader(_dbPath))
