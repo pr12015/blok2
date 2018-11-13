@@ -9,41 +9,51 @@ namespace Worker
 {
     class ConfigParser
     {
-        private static readonly string _path = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Service\rbac_config.xml";
-        private static readonly string[]  zones = { "green", "blue", "red" };
-        /*
-        public static double GetPrice(double value)
-        {
-            using (var reader = XmlReader.Create(path))
-            {
-                double price;
-                while (reader.Read())
-                {
-                    if(reader.NodeType == XmlNodeType.Element && zones.Contains(reader.Name))
-                    {
-                        reader.ReadAttributeValue()
-                    }
-                }
-            }
-        }
-        */
+        private static readonly string _path = @"C:\Users\stefan\Desktop\blok2\Blok2Project\Worker\config.xml";
 
         public static double GetPrice(double value)
         {
             var doc = new XmlDocument();
+            double price;
 
             using(var reader = XmlReader.Create(_path))
             {
                 doc.PreserveWhitespace = true;
                 doc.Load(reader);
+                
+                /// Get 'zone' nodes.
                 var nodes = doc.GetElementsByTagName("zone");
-                //nodes[1].
-                foreach(XmlNode node in nodes)
+                foreach (XmlNode node in nodes)
                 {
-                    var min = node.Attributes["min"].Value;
-                    var max = node.Attributes["max"].Value;
-                    //if(value)
+                    /// example node: 
+                    /// <zone price="12.1">
+                    ///     <min>0</min> 
+                    ///     <max>350</min> 
+                    /// </zone>
+                    /// <max></max> can be ommited. Default max is 100000.
+                    price = double.Parse(node.Attributes["price"].Value);
+
+                    var children = node.ChildNodes;
+                    int min = 0, max = 100000;
+
+                    foreach (XmlNode child in children)
+                    {
+                        if (child.Name == "min")
+                        {
+                            min = int.Parse(child.Value);
+                        }
+                        if (child.Name == "max")
+                        {
+                            max = int.Parse(child.Value);
+                        }
+                    }
+
+                    if (value > min && value < max)
+                    {
+                        return price;
+                    }
                 }
+                throw new Exception("value out of bounds");
             }
         }
     }

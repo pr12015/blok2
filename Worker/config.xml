@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<zones>
+  <zone price="5.26">
+    <min>0</min>
+    <max>350</max>
+  </zone>
+
+  <zone price="7.89">
+    <min>351</min>
+    <max>1600</max>
+  </zone>
+
+  <zone price="15.79">
+    <min>1601</min>
+  </zone>
+</zones>
