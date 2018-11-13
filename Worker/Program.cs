@@ -32,6 +32,7 @@ namespace Worker
 
                 var timer = new Timer
                 {
+                    /// timer interval is extracted from command line argument.
                     Interval = double.Parse(args[1])
                 };
 
