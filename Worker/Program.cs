@@ -21,11 +21,11 @@ namespace Worker
 
             var serviceCertificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, serviceCertCN);
             
-            var address = "net.tcp://localhost:9998/LBDuplex";
+            var address = "net.tcp://localhost:9998/LBDuplexWorker";
             var endpoint = new EndpointAddress(new Uri(address), new X509CertificateEndpointIdentity(serviceCertificate));
             var handler = new CallBackHandler();
 
-            using (var proxy = new LBDuplexClient(handler, binding, address))
+            using (var proxy = new LBDuplexClient(handler, binding, endpoint))
             {
                 proxy.Subscribe();
                 Console.WriteLine("Subscribed to LoadBalancer.");
@@ -33,11 +33,12 @@ namespace Worker
                 var timer = new Timer
                 {
                     /// timer interval is extracted from command line argument.
-                    Interval = double.Parse(args[1])
+                    /// Interval = double.Parse(args[1])
+                    Interval = 10000
                 };
 
                 timer.Elapsed += delegate { OnTimedEvent(proxy); };
-                timer.Start();
+                //timer.Start();
 
                 Console.ReadKey(false);
             }

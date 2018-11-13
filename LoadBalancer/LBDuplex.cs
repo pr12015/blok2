@@ -9,6 +9,7 @@ using Contracts;
 namespace LoadBalancer
 {
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
+    [CallbackBehavior(IncludeExceptionDetailInFaults = true)]
     public class LBDuplex : IWorker, IServer
     {
         private static readonly object _workerLock = new object();
@@ -43,14 +44,16 @@ namespace LoadBalancer
                     {
                         workersFree.RemoveAt(i);
                         reCalculate = true;
-                    }
-
-                    /// Recalculate the cost factor of the rest of the workers.
-                    if (reCalculate)
-                    {
-                        workersFree[i].Second -= 1;
+                        break;
                     }
                     ++i;
+                }
+
+                /// Recalculate the cost factor of the rest of the workers.
+                if (reCalculate)
+                {
+                    for (; i < workersFree.Count; ++i)
+                        workersFree[i].Second -= 1;
                 }
             }
         }
@@ -90,8 +93,9 @@ namespace LoadBalancer
                     result = worker.First.GetBill(value);
                     break;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     worker = GetFreeWorker();
                 }
             }

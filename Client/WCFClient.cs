@@ -110,18 +110,18 @@ namespace Client
             return allowed;
         }
 
-        public int GetBill()
+        public double GetBill(int id)
         {
-            int value = -1;
+            double value = -1;
 
             try
             {
-                value = factory.GetBill();
-                Console.WriteLine("Read() Value: {0}", value);
+                value = factory.GetBill(id);
+                Console.WriteLine("Electric Bill: {0}", value);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while trying to Read(). {0}", e.Message);
+                Console.WriteLine("Error while trying to GetBill(). {0}", e.Message);
             }
 
             return value;

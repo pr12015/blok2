@@ -36,11 +36,11 @@ namespace Service
             host.Open();
             Console.WriteLine("WCFService is opened. Press <enter> to finish...");
 
-            string addressLB = "net.tcp://localhost:9997/LBDuplex";
-            using (LoadBalancerClient proxy = new LoadBalancerClient(binding, new EndpointAddress(addressLB)))
-            {
-                Console.WriteLine(proxy.RequestBill(12.11));
-            }
+            //string addressLB = "net.tcp://localhost:9997/LBDuplex";
+            //using (LoadBalancerClient proxy = new LoadBalancerClient(binding, new EndpointAddress(addressLB)))
+            //{
+            //    Console.WriteLine(proxy.RequestBill(12.11));
+            //}
             
             Console.ReadLine();
             host.Close();

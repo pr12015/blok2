@@ -10,7 +10,7 @@ namespace Worker
     {
         public double GetBill(double value)
         {
-            return --value;
+            return value * ConfigParser.GetPrice(value);
         }
     }
 }

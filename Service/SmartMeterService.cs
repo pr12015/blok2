@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Contracts;
 using System.Threading;
 using RBAC_Authorization;
+using System.ServiceModel;
 
 namespace Service
 {
@@ -124,20 +125,18 @@ namespace Service
             return deleted;
         }
 
-        public int GetBill()
+        public double GetBill(int id)
         {
-           CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-           // if (principal.IsInRole(Permissions.Read.ToString()))
-           // {
-                Console.WriteLine("Read() successfully executed by {0}.", principal.Identity.Name);
-                return 1;
-           // }
-           /* else
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            Console.WriteLine("Read() successfully executed by {0}.", principal.Identity.Name);
+            var eMeter = DataBase.Read(id);
+
+            var binding = new NetTcpBinding();
+            string addressLB = "net.tcp://localhost:9997/LBDuplex";
+            using (LoadBalancerClient proxy = new LoadBalancerClient(binding, new EndpointAddress(addressLB)))
             {
-                Console.WriteLine("GetBill() failed for user {0}.", principal.Identity.Name);
+                return proxy.RequestBill(eMeter.Reading);
             }
-            return -1;
-            */
         }
 
     }

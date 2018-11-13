@@ -40,11 +40,11 @@ namespace Worker
                     {
                         if (child.Name == "min")
                         {
-                            min = int.Parse(child.Value);
+                            min = int.Parse(child.InnerText);
                         }
                         if (child.Name == "max")
                         {
-                            max = int.Parse(child.Value);
+                            max = int.Parse(child.InnerText);
                         }
                     }
 
