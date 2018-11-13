@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csproj", "{117B81C6-1FE5-4BBA-BA35-82BCA3107FD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateManager", "Common\CertificateManager.csproj", "{373D14C6-7364-483C-A489-92F2726A0B73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{117B81C6-1FE5-4BBA-BA35-82BCA3107FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117B81C6-1FE5-4BBA-BA35-82BCA3107FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117B81C6-1FE5-4BBA-BA35-82BCA3107FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373D14C6-7364-483C-A489-92F2726A0B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373D14C6-7364-483C-A489-92F2726A0B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373D14C6-7364-483C-A489-92F2726A0B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373D14C6-7364-483C-A489-92F2726A0B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
