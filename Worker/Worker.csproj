@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallBackHandler.cs" />
+    <Compile Include="ConfigParser.cs" />
     <Compile Include="LBDuplexClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
