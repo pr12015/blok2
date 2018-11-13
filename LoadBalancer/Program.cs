@@ -19,21 +19,22 @@ namespace LoadBalancer
         {
             string serviceCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
 
-            var binding = new NetTcpBinding();
-            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+            var bindingWorker = new NetTcpBinding();
+            bindingWorker.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
             string addressWorker = "net.tcp://localhost:9998/LBDuplex";
             string addressServer = "net.tcp://localhost:9997/LBDuplex";
 
-            Console.ReadKey(false);
+            //Console.ReadKey(false);
 
             var hostWorker = new ServiceHost(typeof(LBDuplex));
-            hostWorker.AddServiceEndpoint(typeof(IWorker), binding, addressWorker);
+            hostWorker.AddServiceEndpoint(typeof(IWorker), bindingWorker, addressWorker);
             hostWorker.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
             hostWorker.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
             hostWorker.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, serviceCertCN);
 
+            var bindingServer = new NetTcpBinding();
             var hostServer = new ServiceHost(typeof(LBDuplex));
-            hostServer.AddServiceEndpoint(typeof(IServer), binding, addressServer);
+            hostServer.AddServiceEndpoint(typeof(IServer), bindingServer, addressServer);
 
             try
             {

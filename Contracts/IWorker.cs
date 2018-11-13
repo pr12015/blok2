@@ -11,8 +11,9 @@ namespace Contracts
     public interface IWorker
     {
         [OperationContract]
-        void SignIn(int value);
+        void Subscribe();
+
         [OperationContract]
-        void SignOut(int value);
+        void UnSubscribe();
     }
 }

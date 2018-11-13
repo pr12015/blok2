@@ -26,14 +26,14 @@ namespace Worker
             this.Close();
         }
 
-        public void SignIn(int value)
+        public void Subscribe()
         {
-            proxy.SignIn(value);
+            proxy.Subscribe();
         }
 
-        public void SignOut(int value)
+        public void UnSubscribe()
         {
-            proxy.SignOut(value);
+            proxy.UnSubscribe();
         }
     }
 }

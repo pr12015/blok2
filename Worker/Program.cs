@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
+using System.Timers;
 
 namespace Worker
 {
@@ -28,8 +29,15 @@ namespace Worker
             {
                 proxy.SignIn(100);
                 Console.WriteLine("Signing in...");
+                Environment.Exit(0);
+
                 while (true) ;
             }
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e, LBDuplexClient proxy)
+        {
+            proxy.SignOut();
         }
     }
 }
