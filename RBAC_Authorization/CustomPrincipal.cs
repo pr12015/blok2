@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Principal;
+using EventLogger;
 
 namespace RBAC_Authorization
 {
@@ -21,13 +22,12 @@ namespace RBAC_Authorization
         {
             this.winId = winIdentity;
 
-            // ubacimo grupe sa dozvolama
+            /// Add groups with permissions.
             foreach (var group in this.winId.Groups)
             {
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
                 var name = sid.Translate(typeof(NTAccount));
 
-                // ovde bila greska, nigde veze koja glupost
                 string groupName = string.Empty;
                 if (name.ToString().Contains("\\"))
                     groupName = name.ToString().Split('\\')[1];

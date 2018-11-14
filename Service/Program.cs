@@ -16,6 +16,10 @@ namespace Service
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Mode = SecurityMode.Transport;
+            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+
             string address = "net.tcp://localhost:9999/WCFService";
 
             ServiceHost host = new ServiceHost(typeof(SmartMeterService));
@@ -36,12 +40,6 @@ namespace Service
             host.Open();
             Console.WriteLine("WCFService is opened. Press <enter> to finish...");
 
-            //string addressLB = "net.tcp://localhost:9997/LBDuplex";
-            //using (LoadBalancerClient proxy = new LoadBalancerClient(binding, new EndpointAddress(addressLB)))
-            //{
-            //    Console.WriteLine(proxy.RequestBill(12.11));
-            //}
-            
             Console.ReadLine();
             host.Close();
         }

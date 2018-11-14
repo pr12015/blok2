@@ -60,6 +60,10 @@
       <Project>{e35b0551-ae77-4684-a1dd-4f63eb82984b}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\EventLogger.csproj">
+      <Project>{9b94b739-45a2-4fde-bc63-b6cce67085ef}</Project>
+      <Name>EventLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RBAC_Authorization\RBAC_Authorization.csproj">
       <Project>{c0acb41f-7017-4bac-9798-fda1be379f5a}</Project>
       <Name>RBAC_Authorization</Name>

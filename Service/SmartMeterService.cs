@@ -7,11 +7,14 @@ using Contracts;
 using System.Threading;
 using RBAC_Authorization;
 using System.ServiceModel;
+using EventLogger;
 
 namespace Service
 {
     class SmartMeterService : ISmartMeterService
     {
+        
+        Logger logger = new Logger("Service.Audit", "ServiceLog");
         public bool ModifyID(int newValue, int oldValue)
         {
             bool modified = false;
@@ -25,9 +28,11 @@ namespace Service
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.ModifyID(oldValue, newValue);
                 modified = true;
+                logger.Log(principal.Identity.Name, "ModifyID", "", EventType.AuthenticationSuccess);
             }
             else
             {
+                logger.Log(principal.Identity.Name, "ModifyID", permission, EventType.AuthenticationFailure);
                 Console.WriteLine("ModifyDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -47,9 +52,11 @@ namespace Service
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.ModifyReading(id, newValue);
                 modified = true;
+                logger.Log(principal.Identity.Name, "ModifyReading", "", EventType.AuthenticationSuccess);
             }
             else
             {
+                logger.Log(principal.Identity.Name, "ModifyReading", permission, EventType.AuthenticationFailure);
                 Console.WriteLine("ModifyDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -70,9 +77,11 @@ namespace Service
                 Console.WriteLine("AddDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.Write(newEMeter);
                 added = true;
+                logger.Log(principal.Identity.Name, "AddDB", "", EventType.AuthenticationSuccess);
             }
             else
             {
+                logger.Log(principal.Identity.Name, "AddDB", permission, EventType.AuthenticationFailure);
                 Console.WriteLine("AddDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -93,9 +102,11 @@ namespace Service
                 Console.WriteLine("DeleteEntityDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.DeleteEntity(id);
                 deleted = true;
+                logger.Log(principal.Identity.Name, "DeleteEntityDB", "", EventType.AuthenticationSuccess);
             }
             else
             {
+                logger.Log(principal.Identity.Name, "DeleteEntityDB", permission, EventType.AuthenticationFailure);
                 Console.WriteLine("DeleteEntityDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -116,9 +127,11 @@ namespace Service
                 Console.WriteLine("DeleteDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.DeleteDB();
                 deleted = true;
+                logger.Log(principal.Identity.Name, "DeleteDB", "", EventType.AuthenticationSuccess);
             }
             else
             {
+                logger.Log(principal.Identity.Name, "DeleteDB", permission, EventType.AuthenticationFailure);
                 Console.WriteLine("DeleteDB() failed for user {0}.", principal.Identity.Name);
             }
 

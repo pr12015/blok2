@@ -20,7 +20,7 @@ namespace Worker
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
             var serviceCertificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, serviceCertCN);
-            
+
             var address = "net.tcp://localhost:9998/LBDuplexWorker";
             var endpoint = new EndpointAddress(new Uri(address), new X509CertificateEndpointIdentity(serviceCertificate));
             var handler = new CallBackHandler();

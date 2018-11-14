@@ -12,11 +12,14 @@ namespace Client
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Mode = SecurityMode.Transport;
+            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+
             string address = "net.tcp://localhost:9999/WCFService";
 
             using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
             {
-
                 proxy.GetBill(129);
                 //proxy.AddDB(121, "Petar", 923.12);
                 //proxy.AddDB(122, "Petar", 2123.12);

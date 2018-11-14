@@ -63,6 +63,10 @@
       <Project>{e35b0551-ae77-4684-a1dd-4f63eb82984b}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\EventLogger.csproj">
+      <Project>{9B94B739-45A2-4FDE-BC63-B6CCE67085EF}</Project>
+      <Name>EventLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml" />
