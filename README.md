@@ -40,4 +40,7 @@ RBAC autorizacione seme na osnovu rola koje se citaju iz rbac_config.xml fajla.
 Sistem je testiran tako sto je u startu pokrenuto N workera, koji ce se peridicno gasiti, kako bi se proverilo azuriranje cost factora. Takodje posle izvesnog vremena ce sa paliti i novi workeri koji ce se prijavljivati na LB. Nakon workera bice pokrenuto M korisnika koji ce konstanto slati zahteve za obracunom potrosnje elektricne energije.
 
 Rezultati testiranja autorizacije:
-
+![Autorizacija](https://github.com/pr12015/images/blob/master/Capture.PNG)
+![Autorizacija](https://github.com/pr12015/images/blob/master/Capture1.PNG)
+![Autorizacija](https://github.com/pr12015/images/blob/master/Capture2.PNG)
+![Autorizacija](https://github.com/pr12015/images/blob/master/Capture3.PNG)
