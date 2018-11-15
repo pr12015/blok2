@@ -20,7 +20,15 @@ namespace Service
 
         public double RequestBill(double value)
         {
-            return factory.RequestBill(value);
+            try
+            {
+                return factory.RequestBill(value);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return -1;
+            }
         }
 
         public void Dispose()

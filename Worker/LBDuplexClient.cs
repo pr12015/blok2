@@ -17,7 +17,7 @@ namespace Worker
         public LBDuplexClient(CallBackHandler handler, NetTcpBinding binding, EndpointAddress address)
             : base(new InstanceContext(handler), binding, address)
         {
-            logger = new Logger("LB.Audit", "LoadBalancerLog");
+            //logger = new Logger("LB.Audit", "LoadBalancerLog");
             string clientCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             
             this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
@@ -40,11 +40,11 @@ namespace Worker
             try
             {
                 proxy.Subscribe();
-                logger.Log("wcfclient", EventLogger.EventType.AuthenticationSuccess);
+                //logger.Log("wcfclient", EventLogger.EventType.AuthenticationSuccess);
             }
             catch(Exception e)
             {
-                logger.Log("wcfclient", EventLogger.EventType.AuthenticationFailure);
+                //logger.Log("wcfclient", EventLogger.EventType.AuthenticationFailure);
             }
         }
 

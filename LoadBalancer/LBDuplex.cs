@@ -8,7 +8,8 @@ using Contracts;
 
 namespace LoadBalancer
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
+    //[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     [CallbackBehavior(IncludeExceptionDetailInFaults = true)]
     public class LBDuplex : IWorker, IServer
     {
@@ -43,6 +44,7 @@ namespace LoadBalancer
                     if (callBack.First == CallBack)
                     {
                         workersFree.RemoveAt(i);
+                        --cost;
                         reCalculate = true;
                         break;
                     }
@@ -55,7 +57,15 @@ namespace LoadBalancer
                     for (; i < workersFree.Count; ++i)
                         workersFree[i].Second -= 1;
                 }
+
+                PrintCostFactor();
             }
+        }
+
+        private void PrintCostFactor()
+        {
+            Console.WriteLine("COST FACTOR: " + workersFree.Last().Second);
+            Console.WriteLine("COST INDEX: " + cost);
         }
 
         private Pair<IWorkerCallBack, int> GetFreeWorker()
@@ -73,7 +83,8 @@ namespace LoadBalancer
         {
             lock (_workerLock)
             {
-                if (worker.Second > workersFree.Count + 1)
+                // if (worker.Second < workersFree.Count + 1)
+                if (worker.Second <= workersFree.Count)
                     workersFree.Insert(worker.Second - 1, worker);
                 else
                     workersFree.Add(worker);

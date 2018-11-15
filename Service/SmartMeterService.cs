@@ -28,11 +28,11 @@ namespace Service
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.ModifyID(oldValue, newValue);
                 modified = true;
-                logger.Log(principal.Identity.Name, "ModifyID", "", EventType.AuthenticationSuccess);
+                logger.Log(principal.Identity.Name, "ModifyID", "", EventType.AuthorizationSuccess);
             }
             else
             {
-                logger.Log(principal.Identity.Name, "ModifyID", permission, EventType.AuthenticationFailure);
+                logger.Log(principal.Identity.Name, "ModifyID", permission, EventType.AuthorizationFailure);
                 Console.WriteLine("ModifyDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -52,11 +52,11 @@ namespace Service
                 Console.WriteLine("ModifyDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.ModifyReading(id, newValue);
                 modified = true;
-                logger.Log(principal.Identity.Name, "ModifyReading", "", EventType.AuthenticationSuccess);
+                logger.Log(principal.Identity.Name, "ModifyReading", "", EventType.AuthorizationSuccess);
             }
             else
             {
-                logger.Log(principal.Identity.Name, "ModifyReading", permission, EventType.AuthenticationFailure);
+                logger.Log(principal.Identity.Name, "ModifyReading", permission, EventType.AuthorizationFailure);
                 Console.WriteLine("ModifyDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -77,11 +77,11 @@ namespace Service
                 Console.WriteLine("AddDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.Write(newEMeter);
                 added = true;
-                logger.Log(principal.Identity.Name, "AddDB", "", EventType.AuthenticationSuccess);
+                logger.Log(principal.Identity.Name, "AddDB", "", EventType.AuthorizationSuccess);
             }
             else
             {
-                logger.Log(principal.Identity.Name, "AddDB", permission, EventType.AuthenticationFailure);
+                logger.Log(principal.Identity.Name, "AddDB", permission, EventType.AuthorizationFailure);
                 Console.WriteLine("AddDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -102,11 +102,11 @@ namespace Service
                 Console.WriteLine("DeleteEntityDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.DeleteEntity(id);
                 deleted = true;
-                logger.Log(principal.Identity.Name, "DeleteEntityDB", "", EventType.AuthenticationSuccess);
+                logger.Log(principal.Identity.Name, "DeleteEntityDB", "", EventType.AuthorizationSuccess);
             }
             else
             {
-                logger.Log(principal.Identity.Name, "DeleteEntityDB", permission, EventType.AuthenticationFailure);
+                logger.Log(principal.Identity.Name, "DeleteEntityDB", permission, EventType.AuthorizationFailure);
                 Console.WriteLine("DeleteEntityDB() failed for user {0}.", principal.Identity.Name);
             }
 
@@ -127,11 +127,11 @@ namespace Service
                 Console.WriteLine("DeleteDB() passed for user {0}.", principal.Identity.Name);
                 DataBase.DeleteDB();
                 deleted = true;
-                logger.Log(principal.Identity.Name, "DeleteDB", "", EventType.AuthenticationSuccess);
+                logger.Log(principal.Identity.Name, "DeleteDB", "", EventType.AuthorizationSuccess);
             }
             else
             {
-                logger.Log(principal.Identity.Name, "DeleteDB", permission, EventType.AuthenticationFailure);
+                logger.Log(principal.Identity.Name, "DeleteDB", permission, EventType.AuthorizationFailure);
                 Console.WriteLine("DeleteDB() failed for user {0}.", principal.Identity.Name);
             }
 

@@ -15,6 +15,7 @@ namespace Worker
         static void Main(string[] args)
         {
             const string serviceCertCN = "wcfservice";
+            Console.WriteLine(args.Length);
 
             var binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
@@ -33,12 +34,12 @@ namespace Worker
                 var timer = new Timer
                 {
                     /// timer interval is extracted from command line argument.
-                    /// Interval = double.Parse(args[1])
-                    Interval = 10000
+                    Interval = double.Parse(args[1])
+                    //Interval = 10000
                 };
 
                 timer.Elapsed += delegate { OnTimedEvent(proxy); };
-                //timer.Start();
+                timer.Start();
 
                 Console.ReadKey(false);
             }

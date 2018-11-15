@@ -22,10 +22,12 @@ namespace RBAC_Authorization
                 if (success)
                 {
                     logger.Log(principal.Identity.Name, "Read", "", EventLogger.EventType.AuthenticationSuccess);
+                    return true;
                 }
                 else
                 {
                     logger.Log(principal.Identity.Name, "Read", permission, EventLogger.EventType.AuthenticationFailure);
+                    return false;
                 }
             }
 
